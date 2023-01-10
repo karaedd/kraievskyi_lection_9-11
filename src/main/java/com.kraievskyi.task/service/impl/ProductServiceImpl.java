@@ -4,6 +4,7 @@ import com.kraievskyi.task.model.Product;
 import com.kraievskyi.task.repository.ProductRepository;
 import com.kraievskyi.task.service.ProductService;
 import java.util.List;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -37,11 +38,22 @@ public class ProductServiceImpl implements ProductService {
         productToChange.setCategory(product.getCategory());
         productToChange.setDateManufacture(product.getDateManufacture());
         productToChange.setDateExpire(product.getDateExpire());
+        productRepository.save(productToChange);
         return productToChange;
     }
 
     @Override
     public void deleteById(Long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Product> findAllByCategoryIdAndName(Long id, String name, PageRequest pageRequest) {
+        return productRepository.findAllByCategoryIdAndName(id, name, pageRequest);
+    }
+
+    @Override
+    public void updateProductName(Long id, String name) {
+        productRepository.updateProductName(id, name);
     }
 }

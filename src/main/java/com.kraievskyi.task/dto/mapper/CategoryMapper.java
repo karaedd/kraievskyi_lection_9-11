@@ -1,6 +1,5 @@
 package com.kraievskyi.task.dto.mapper;
 
-import com.kraievskyi.task.dto.CategoryRequestDto;
 import com.kraievskyi.task.dto.CategoryResponseDto;
 import com.kraievskyi.task.model.Category;
 import org.springframework.stereotype.Component;
@@ -13,11 +12,5 @@ public class CategoryMapper {
         categoryResponseDto.setId(category.getId());
         categoryResponseDto.setName(category.getName());
         return categoryResponseDto;
-    }
-
-    public Category toModel(CategoryRequestDto categoryRequestDto) {
-        Category category = new Category();
-        category.setName(categoryRequestDto.getName());
-        return category;
     }
 }
