@@ -9,18 +9,16 @@ import jakarta.persistence.Table;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
 
 @Entity
 @Table(name = "category")
 @Getter
-@Setter
 @EqualsAndHashCode
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany
+    @OneToMany(mappedBy = "category")
     private List<Product> product;
 }

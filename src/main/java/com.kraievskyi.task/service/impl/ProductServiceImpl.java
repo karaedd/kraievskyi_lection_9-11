@@ -3,6 +3,7 @@ package com.kraievskyi.task.service.impl;
 import com.kraievskyi.task.model.Product;
 import com.kraievskyi.task.repository.ProductRepository;
 import com.kraievskyi.task.service.ProductService;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,7 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAllByCategoryIdAndName(id, name, pageRequest);
     }
 
+    @Transactional
     @Override
     public void updateProductName(Long id, String name) {
         productRepository.updateProductName(id, name);

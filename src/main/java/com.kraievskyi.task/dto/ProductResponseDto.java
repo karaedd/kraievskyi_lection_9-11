@@ -1,9 +1,13 @@
 package com.kraievskyi.task.dto;
 
 import java.time.LocalDate;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode
 public class ProductResponseDto {
     private Long id;
     private String name;
