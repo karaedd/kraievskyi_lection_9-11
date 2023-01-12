@@ -1,13 +1,14 @@
 package com.kraievskyi.task.dto;
 
 import java.time.LocalDate;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
 
 @Getter
 @Setter
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductRequestDto {
     private String name;
     private Double price;

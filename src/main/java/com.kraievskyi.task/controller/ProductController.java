@@ -48,7 +48,7 @@ public class ProductController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("category/{id}")
+    @GetMapping("/category/{id}")
     public List<ProductResponseDto> getAllByCategoryIdAndName(
             @PathVariable Long id, @RequestParam String name,
             @RequestParam (defaultValue = "10") Integer count,

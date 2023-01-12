@@ -34,4 +34,24 @@ public class Product {
     public Product(String name) {
         this.name = name;
     }
+
+
+    public Product(String name, Double price, Category category, LocalDate dateManufacture, LocalDate dateExpire) {
+        this.name = name;
+        this.price = price;
+        this.category = category;
+        this.dateManufacture = dateManufacture;
+        this.dateExpire = dateExpire;
+    }
+
+    public Product(Long id, String name, Double price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
+    public Product(String name, Double price) {
+        this.name = name;
+        this.price = price;
+    }
 }
