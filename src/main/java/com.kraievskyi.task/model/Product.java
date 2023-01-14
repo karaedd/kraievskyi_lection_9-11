@@ -35,8 +35,8 @@ public class Product {
         this.name = name;
     }
 
-
-    public Product(String name, Double price, Category category, LocalDate dateManufacture, LocalDate dateExpire) {
+    public Product(String name, Double price, Category category,
+                   LocalDate dateManufacture, LocalDate dateExpire) {
         this.name = name;
         this.price = price;
         this.category = category;

@@ -29,10 +29,10 @@ public class ProductController {
         this.productMapper = productMapper;
     }
 
-    @PostMapping()
+    @PostMapping
     public ProductResponseDto create(@RequestBody ProductRequestDto productRequestDto) {
         return productMapper.toProductResponseDto(productService
-                .create(productMapper.toModel(productRequestDto)));
+                .save(productMapper.toModel(productRequestDto)));
     }
 
     @GetMapping("/{id}")

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.PageRequest;
 
 public interface ProductService {
-    Product create(Product product);
+    Product save(Product product);
 
     List<Product> getAllProducts();
 

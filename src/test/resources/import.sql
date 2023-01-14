@@ -1,4 +1,6 @@
 INSERT INTO category (name) VALUES ('milk');
+INSERT INTO category (name) VALUES ('butter');
+INSERT INTO category (name) VALUES ('cheese');
 
 INSERT INTO product (name, price, category_id, date_manufacture, date_expire) VALUES ('yagotynske', 37.53, 1, '2023-01-09', '2023-01-17');
 INSERT INTO product (name, price, category_id, date_manufacture, date_expire) VALUES ('galychyna', 38.62, 1, '2023-01-10', '2023-01-18');

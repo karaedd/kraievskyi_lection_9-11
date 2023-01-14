@@ -1,10 +1,12 @@
 package com.kraievskyi.task.dto;
 
-import lombok.EqualsAndHashCode;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Setter
-@EqualsAndHashCode
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CategoryResponseDto {
     private Long id;
     private String name;
