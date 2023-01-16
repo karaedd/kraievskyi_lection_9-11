@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b5e8ba51-4029-4212-8cde-5d9541c41394",
+		"_postman_id": "99d1a9c0-53e9-4d02-87e8-a03aad0f955e",
 		"name": "Products",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "17797746"
@@ -101,7 +101,7 @@
 						},
 						{
 							"key": "page2",
-							"value": null
+							"value": ""
 						}
 					]
 				}
@@ -115,7 +115,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"kefir\"\r\n}",
+					"raw": "{\r\n    \"name\": \"kefir\",\r\n    \"price\": \"400.20\",\r\n    \"categoryId\": 3,\r\n    \"dateManufacture\": \"2023-01-09\",\r\n    \"dateExpire\": \"2023-02-09\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -141,7 +141,25 @@
 			"name": "updateProductName",
 			"request": {
 				"method": "PATCH",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/product/2?name=loh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"product",
+						"2"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "loh"
+						}
+					]
+				}
 			},
 			"response": []
 		},
