@@ -8,6 +8,8 @@ import com.kraievskyi.task.model.Product;
 import com.kraievskyi.task.service.ProductService;
 import io.restassured.http.ContentType;
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
+import java.time.LocalDate;
+import java.util.List;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,8 +22,6 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import java.time.LocalDate;
-import java.util.List;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
@@ -60,15 +60,6 @@ class ProductControllerTest {
                 .then()
                 .statusCode(200)
                 .body("size()", Matchers.equalTo(3));
-//                .body("[0].id", Matchers.equalTo(1))
-//                .body("[0].name", Matchers.equalTo("yagotynske"))
-//                .body("[0].price" , Matchers.equalTo(37.53f))
-//                .body("[1].id", Matchers.equalTo(2))
-//                .body("[1].name", Matchers.equalTo("galychyna"))
-//                .body("[1].price" , Matchers.equalTo(38.62f))
-//                .body("[2].id", Matchers.equalTo(3))
-//                .body("[2].name", Matchers.equalTo("ferma"))
-//                .body("[2].price" , Matchers.equalTo(36.65f));
     }
 
     @Test
@@ -95,24 +86,6 @@ class ProductControllerTest {
                 .get("/product/category/{id}", 1)
                 .then()
                 .body("size()", Matchers.equalTo(3));
-//                .body("[0].id", Matchers.equalTo(1))
-//                .body("[0].name", Matchers.equalTo("ferma"))
-//                .body("[0].price", Matchers.equalTo(36.65f))
-//                .body("[0].categoryId", Matchers.equalTo(1))
-//                .body("[0].dateManufacture", Matchers.equalTo("2023-01-11"))
-//                .body("[0].dateExpire", Matchers.equalTo("2023-01-19"))
-//                .body("[1].id", Matchers.equalTo(2))
-//                .body("[1].name", Matchers.equalTo("ferma"))
-//                .body("[1].price", Matchers.equalTo(37.45f))
-//                .body("[1].categoryId", Matchers.equalTo(1))
-//                .body("[1].dateManufacture", Matchers.equalTo("2023-02-01"))
-//                .body("[1].dateExpire", Matchers.equalTo("2023-01-22"))
-//                .body("[2].id", Matchers.equalTo(3))
-//                .body("[2].name", Matchers.equalTo("ferma"))
-//                .body("[2].price", Matchers.equalTo(38.35f))
-//                .body("[2].categoryId", Matchers.equalTo(1))
-//                .body("[2].dateManufacture", Matchers.equalTo("2023-01-05"))
-//                .body("[2].dateExpire", Matchers.equalTo("2023-01-19"));
     }
 
     @Test
@@ -123,7 +96,7 @@ class ProductControllerTest {
         Mockito.when(productMapper.toProductResponseDto(productService.save(productToSave)))
                 .thenReturn(new ProductResponseDto(6L, "ferma", 36.65,
                         1L, LocalDate.of(2023, 1, 11),
-                        LocalDate.of(2023, 1, 19))).getMock();
+                        LocalDate.of(2023, 1, 19)));
 
         RestAssuredMockMvc.given()
                 .contentType(ContentType.JSON)
@@ -136,13 +109,53 @@ class ProductControllerTest {
                 .when()
                 .post("/product")
                 .then()
-                .statusCode(200)
+                .statusCode(201)
                 .body("id", Matchers.equalTo(6))
                 .body("name", Matchers.equalTo("ferma"))
                 .body("price", Matchers.equalTo(36.65f))
                 .body("categoryId", Matchers.equalTo(1))
                 .body("dateManufacture", Matchers.equalTo("2023-01-11"))
                 .body("dateExpire", Matchers.equalTo("2023-01-19"));
+    }
+
+    @Test
+    public void shouldNotCreateProductWithoutName() {
+        Product productToSave = new Product("", 36.65,
+                new Category(1L, "milk"), LocalDate.of(2023, 1, 11),
+                LocalDate.of(2023, 1, 19));
+
+        RestAssuredMockMvc.given()
+                .contentType(ContentType.JSON)
+                .body(new ProductRequestDto(
+                        productToSave.getName(),
+                        productToSave.getPrice(),
+                        productToSave.getCategory().getId(),
+                        productToSave.getDateManufacture(),
+                        productToSave.getDateExpire()))
+                .when()
+                .post("/product")
+                .then()
+                .statusCode(400);
+    }
+
+    @Test
+    public void shouldNotCreateProductWithNegativePrice() {
+        Product productToSave = new Product("ferma", -1.0,
+                new Category(1L, "milk"), LocalDate.of(2023, 1, 11),
+                LocalDate.of(2023, 1, 19));
+
+        RestAssuredMockMvc.given()
+                .contentType(ContentType.JSON)
+                .body(new ProductRequestDto(
+                        productToSave.getName(),
+                        productToSave.getPrice(),
+                        productToSave.getCategory().getId(),
+                        productToSave.getDateManufacture(),
+                        productToSave.getDateExpire()))
+                .when()
+                .post("/product")
+                .then()
+                .statusCode(400);
     }
 
     @Test

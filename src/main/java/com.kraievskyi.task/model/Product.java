@@ -31,12 +31,10 @@ public class Product {
     private LocalDate dateManufacture;
     private LocalDate dateExpire;
 
-    public Product(String name) {
-        this.name = name;
-    }
-
-    public Product(String name, Double price, Category category,
-                   LocalDate dateManufacture, LocalDate dateExpire) {
+    public Product(String name, Double price,
+                   Category category,
+                   LocalDate dateManufacture,
+                   LocalDate dateExpire) {
         this.name = name;
         this.price = price;
         this.category = category;
@@ -44,14 +42,7 @@ public class Product {
         this.dateExpire = dateExpire;
     }
 
-    public Product(Long id, String name, Double price) {
-        this.id = id;
+    public Product(String name) {
         this.name = name;
-        this.price = price;
-    }
-
-    public Product(String name, Double price) {
-        this.name = name;
-        this.price = price;
     }
 }
